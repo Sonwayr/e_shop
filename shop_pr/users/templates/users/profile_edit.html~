@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Edit Profile</h1>
+    <div class="card">
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="country" class="form-label">Country</label>
+                    <input type="text" name="country" id="country" class="form-control" value="{{ form.country.value }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="city" class="form-label">City</label>
+                    <input type="text" name="city" id="city" class="form-control" value="{{ form.city.value }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="zip_code" class="form-label">Zip Code</label>
+                    <input type="text" name="zip_code" id="zip_code" class="form-control" value="{{ form.zip_code.value }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="street" class="form-label">Street</label>
+                    <input type="text" name="street" id="street" class="form-control" value="{{ form.street.value }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="house_number" class="form-label">House Number</label>
+                    <input type="text" name="house_number" id="house_number" class="form-control" value="{{ form.house_number.value }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="phone_number" class="form-label">Phone Number</label>
+                    <input type="text" name="phone_number" id="phone_number" class="form-control" value="{{ form.phone_number.value }}" required>
+                </div>
+                
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

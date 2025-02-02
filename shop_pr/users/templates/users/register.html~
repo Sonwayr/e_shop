@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center mb-4">Register</h1>
+            
+            <div class="card">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" name="username" id="username" class="form-control" value="{{ form.username.value }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email address</label>
+                            <input type="email" name="email" id="email" class="form-control" value="{{ form.email.value }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="first_name" class="form-label">First Name</label>
+                            <input type="text" name="first_name" id="first_name" class="form-control" value="{{ form.first_name.value }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="last_name" class="form-label">Last Name</label>
+                            <input type="text" name="last_name" id="last_name" class="form-control" value="{{ form.last_name.value }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="country" class="form-label">Country</label>
+                            <input type="text" name="country" id="country" class="form-control" value="{{ form.country.value }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" name="city" id="city" class="form-control" value="{{ form.city.value }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="zip_code" class="form-label">Zip Code</label>
+                            <input type="text" name="zip_code" id="zip_code" class="form-control" value="{{ form.zip_code.value }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="street" class="form-label">Street</label>
+                            <input type="text" name="street" id="street" class="form-control" value="{{ form.street.value }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="house_number" class="form-label">House Number</label>
+                            <input type="text" name="house_number" id="house_number" class="form-control" value="{{ form.house_number.value }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="phone_number" class="form-label">Phone Number</label>
+                            <input type="text" name="phone_number" id="phone_number" class="form-control" value="{{ form.phone_number.value }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password1" class="form-label">Password</label>
+                            <input type="password" name="password1" id="password1" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password2" class="form-label">Confirm Password</label>
+                            <input type="password" name="password2" id="password2" class="form-control">
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Register</button>
+                        </div>
+
+                    </form>
+
+                    <div class="mt-3 text-center">
+                        <p>Already have an account? <a href="#">Login here</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

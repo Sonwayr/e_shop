@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Add Payment Method</h1>
+
+    <form action="{% url 'payment:add_payment_method' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <div id="card-element">
+        </div>
+
+        <button type="submit">Add Payment Method</button>
+    </form>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script type="text/javascript">
+        var stripe = Stripe("{{ STRIPE_TEST_PUBLIC_KEY }}");
+        var elements = stripe.elements();
+        var card = elements.create("card");
+        card.mount("#card-element");
+
+        var form = document.querySelector("form");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            stripe.createToken(card).then(function(result) {
+                if (result.error) {
+                    console.log(result.error.message);
+                } else {
+                    var tokenInput = document.createElement("input");
+                    tokenInput.setAttribute("type", "hidden");
+                    tokenInput.setAttribute("name", "stripeToken");
+                    tokenInput.setAttribute("value", result.token.id);
+                    form.appendChild(tokenInput);
+
+                    form.submit();
+                }
+            });
+        });
+    </script>
+{% endblock %}

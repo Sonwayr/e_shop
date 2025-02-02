@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load card_tag %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center mb-4">Profile</h1>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Welcome, {{ user.username }}!</h5>
+
+                    <hr>
+
+                    <div class="mb-3">
+                        <strong>Email:</strong>
+                        <p>{{ user.email }}</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>First Name:</strong>
+                        <p>{{ user.first_name }}</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Last Name:</strong>
+                        <p>{{ user.last_name }}</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Phone Number:</strong>
+                        <p>{{ user.phone_number }}</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Address:</strong>
+
+                        <p>
+                            {{ user.addresses }}
+                        </p>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'users:edit_profile' %}" class="btn btn-secondary">Edit Profile</a>
+                        <a href="#" class="btn btn-secondary">View cart</a>
+                        <a href="{% url 'users:logout' %}" class="btn btn-danger">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

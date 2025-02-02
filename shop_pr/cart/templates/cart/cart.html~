@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center my-5">Shopping Cart</h1>
+
+{% if cart_items %}
+    <div class="container">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">Photo</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                    <tr>
+                        <td class="align-middle">{{ item.product.title }}</td>
+                        <td class="text-center align-middle">
+                            {% if item.product.image %}
+                                <img src="{{ item.product.image.url }}" alt="{{ item.product.title }}" class="img-fluid rounded" style="max-width: 100px;">
+                            {% else %}
+                                <span>No image available</span>
+                            {% endif %}
+                        </td>
+                        <td class="align-middle">{{ item.quantity }}</td>
+                        <td class="align-middle">${{ item.product.price }}</td>
+                        <td class="align-middle">${{ item.total_price }}</td>
+                        <td class="d-flex justify-content-center align-items-center mt-3">
+                            <a class="btn btn-danger" href="#">X</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="row justify-content-between">
+            <div class="col-auto">
+                <p class="font-weight-bold ">Total Price: <span class="text-success">${{ object.get_total_price }}</span></p>
+            </div>
+            <div class="col-auto">
+                <a href="#" class="btn btn-success">Proceed to Checkout</a>
+                <a href="{% url 'e_shop:main_page' %}" class="btn btn-secondary">Back to Home</a>
+                <a href="{% url 'e_shop:main_page' %}" class="btn btn-secondary">Delete the Cart</a>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="text-center my-5">
+        <p>Your cart is empty.</p>
+        <a href="#" class="btn btn-warning">Continue Shopping</a>
+        <a href="{% url 'e_shop:main_page' %}" class="btn btn-primary">Back to Home</a>
+    </div>
+{% endif %}
+{% endblock %}

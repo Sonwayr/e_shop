@@ -1,0 +1,11 @@
+from django import template
+
+register = template.Library()
+
+
+@register.filter
+def mask_card_number(card_number):
+    for i in range(len(card_number) - 4):
+        card_number[i] = '*'
+        
+    return card_number

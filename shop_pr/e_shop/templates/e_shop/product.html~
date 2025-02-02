@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.title }}" class="img-fluid rounded">
+            {% else %}
+                <p>No image available</p>
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <h1><strong>{{ product.title }}</strong></h1>
+            <h1 class="display-6">Category: <a class="btn btn-secondary" href="{{ product.category.get_absolute_url }}" class="display-6">{{product.category }}</a></h1>
+            <p class="text-muted">Brand: {{ product.brand }}</p>
+
+            <section class="text-center py-5" style="background: linear-gradient(to right, #6a11cb, #2575fc); color: white;">
+                <div class="container">
+                    <h1 class="display-6">{{ product.description }}</h1>
+                </div>
+            </section>
+
+            <h1><strong>Price:</strong> ${{ product.price }}</h1>
+            <h1><strong>Availability:</strong>
+                {% if product.available %}
+                    <span class="badge bg-success">In Stock</span>
+                {% else %}
+                    <span class="badge bg-danger">Out of Stock</span>
+                {% endif %}
+            </h1>
+            <h1><strong>Listed for sale:</strong> {{ product.created_at|date:"F j, Y, g:i a" }}</h1>
+            <a href="{% url 'cart:add_to_cart' product.id %}" class="btn btn-primary mt-4">Add to cart</a>
+            <a href="#" class="btn btn-danger mt-4">Buy</a>
+            <a href="{% url 'e_shop:main_page' %}" class="btn btn-secondary mt-4">Back to Home</a>
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}
