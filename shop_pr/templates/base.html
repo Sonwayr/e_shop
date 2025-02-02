@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SonShop{% endblock %}</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+<!-- Навигационная панель -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <div class="container">
+        <!-- Логотип слева -->
+        <a class="navbar-brand fw-bold" href="{% url 'e_shop:main_page' %}">SonShop</a>
+
+        <!-- Кнопка для мобильных устройств -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Навигационные элементы -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <!-- Выпадающий список категорий -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        {% if category %}{{ category }}{% else %}Categories{% endif %}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                        {% for category in categories %}
+                        <li><a class="dropdown-item" href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+                        {% empty %}
+                        <li><span class="dropdown-item text-muted">There is no categories</span></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+
+
+            <!-- Кнопки справа -->
+            <div class="d-flex">
+                {% if not user.is_authenticated %}
+                <a href="{% url 'users:login' %}" class="btn btn-outline-primary me-2">Log in</a>
+                <a href="{% url 'users:register' %}" class="btn btn-primary">Register</a>
+                {% else %}
+                <a href="{% url 'users:profile' %}" class="btn btn-outline-primary me-2">My account</a>
+                <a href="{% url 'cart:my_cart' %}" class="btn btn-outline-primary me-2">My cart</a>
+                <a href="{% url 'users:logout' %}" class="btn btn-primary">Log out</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Основное содержимое страницы -->
+<main class="container mt-4">
+    {% block content %}
+    <!-- Сюда будет вставлено содержимое дочерних шаблонов -->
+    {% endblock %}
+</main>
+
+<!-- Футер -->
+<footer class="bg-dark text-white text-center py-3 mt-4" style="width: 100%; margin: 0; padding: 0;">
+    <div class="container-fluid p-0">
+        <p class="mb-0">&copy; 2024 SonShop. All rights reserved.</p>
+    </div>
+</footer>
+
+
+<!-- Bootstrap 5 JS Bundle (включая Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+
+
