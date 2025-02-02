@@ -1,0 +1,8 @@
+Django>=4.0
+Django REST framework
+pytest
+pytest-django
+djangorestframework-simplejwt
+psycopg2  # If using PostgreSQL
+sqlite3  # If using SQLite
+
